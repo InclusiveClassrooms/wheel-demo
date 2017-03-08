@@ -1,5 +1,5 @@
 function drawWheel(formAnswers) {
-  var det = d3.select("#wheel-container").append("svg").attr("id", "detail-text").attr("class", "detail-text");
+  // var det = d3.select("#wheel-container").append("svg").attr("id", "detail-text").attr("class", "detail-text");
   var vis = d3.select("#wheel-container").append("svg").attr("id", "wheel-svg");
   var segmentClass;
   var textPathID;
@@ -17,18 +17,18 @@ function drawWheel(formAnswers) {
 
   for (var i = 0; i < 12; i++) {
     if (i % 2 === 0){
-      det.attr("width", 250).attr("height", 500)
-      .append("text")
-      .attr('x', 0)
-      .attr('y', 100 + i * 20)
-      .text(childDetails[Math.floor(i/2)] + ':')
+      //det.attr("width", 250).attr("height", 500)
+      // .append("text")
+      // .attr('x', 0)
+      // .attr('y', 100 + i * 20)
+      // .text(childDetails[Math.floor(i/2)] + ':')
     } else {
-      det.attr("width", 250).attr("height", 500)
-      .append("text")
-      .attr('x', 0)
-      .attr('y', 100 + i * 20)
-      .text(formAnswers[Math.floor(i/2)].answer)
-      .style("font-weight", "bold");
+      // det.attr("width", 250).attr("height", 500)
+      // .append("text")
+      // .attr('x', 0)
+      // .attr('y', 100 + i * 20)
+      // .text(formAnswers[Math.floor(i/2)].answer)
+      // .style("font-weight", "bold");
     }
   };
 
@@ -120,7 +120,7 @@ function drawWheel(formAnswers) {
 
       if (i === 0 && j < 4) {
         vis.append("svg:image")
-          .attr("xlink:href", "../assets/" + faceImages[j])
+          .attr("xlink:href", faceImages[j])
           .attr("width", 40)
           .attr("height", 40)
           .attr("x", centre - 20)
