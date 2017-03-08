@@ -22,8 +22,10 @@ Typical use:
 
 The object should have keys of `centre`, `height` and `width`
 
+#### Arg #4: file path of the faces svgs. E.g. `'assets'` or `'../assets'`
+
 #### Example use:
 
 ```js
-drawWheel(arr, '#wheel-container', {centre: 250, height: 500, width: 500})
+drawWheel(arr, '#wheel-container', {centre: 250, height: 500, width: 500}, '')
 ```

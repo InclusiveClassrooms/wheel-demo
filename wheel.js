@@ -1,4 +1,4 @@
-function drawWheel(formAnswers, element, dimentions) {
+function drawWheel(formAnswers, element, dimentions, assets_path) {
   var vis = d3.select(element).append("svg").attr("id", "wheel-svg");
   var segmentClass;
   var textPathID;
@@ -102,7 +102,7 @@ function drawWheel(formAnswers, element, dimentions) {
 
       if (i === 0 && j < 4) {
         vis.append("svg:image")
-          .attr("xlink:href", faceImages[j])
+          .attr("xlink:href", assets_path + faceImages[j])
           .attr("width", 40)
           .attr("height", 40)
           .attr("x", centre - 20)
