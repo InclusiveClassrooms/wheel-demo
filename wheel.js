@@ -1,13 +1,13 @@
-function drawWheel(formAnswers) {
-  var vis = d3.select("#wheel-container").append("svg").attr("id", "wheel-svg");
+function drawWheel(formAnswers, element, dimentions) {
+  var vis = d3.select(element).append("svg").attr("id", "wheel-svg");
   var segmentClass;
   var textPathID;
 	var segmentID;
   var faceImages = ["face-never.svg", "face-rarely.svg", "face-sometimes.svg", "face-always.svg"];
   var outerTextArray = ["SELF-AWARENESS & SELF-ESTEEM", "MANAGING FEELINGS", "NON-VERBAL COMMUNICATION", "VERBAL COMMUNICATION", "PLANNING & PROBLEM SOLVING", "RELATIONSHIPS, LEADERSHIP & ASSERTIVENESS"];
-  var centre = 250;
-  var height = 500;
-  var width = 500;
+  var centre = dimentions.centre
+  var height = dimentions.height
+  var width = dimentions.width
   var arc;
 
   var oneSliceWidth = (360 * (Math.PI / 180) / 32); // converted from degrees to radians
