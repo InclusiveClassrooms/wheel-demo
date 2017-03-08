@@ -1,5 +1,4 @@
 function drawWheel(formAnswers) {
-  // var det = d3.select("#wheel-container").append("svg").attr("id", "detail-text").attr("class", "detail-text");
   var vis = d3.select("#wheel-container").append("svg").attr("id", "wheel-svg");
   var segmentClass;
   var textPathID;
@@ -14,23 +13,6 @@ function drawWheel(formAnswers) {
   var oneSliceWidth = (360 * (Math.PI / 180) / 32); // converted from degrees to radians
 
   var childDetails = ['Teaching Assistant',  'Student', 'School', 'School Year', 'Group', 'Date'];
-
-  for (var i = 0; i < 12; i++) {
-    if (i % 2 === 0){
-      //det.attr("width", 250).attr("height", 500)
-      // .append("text")
-      // .attr('x', 0)
-      // .attr('y', 100 + i * 20)
-      // .text(childDetails[Math.floor(i/2)] + ':')
-    } else {
-      // det.attr("width", 250).attr("height", 500)
-      // .append("text")
-      // .attr('x', 0)
-      // .attr('y', 100 + i * 20)
-      // .text(formAnswers[Math.floor(i/2)].answer)
-      // .style("font-weight", "bold");
-    }
-  };
 
   // Draw the outer text in a circle
   for (var m = 0; m < 6; m++) {
@@ -153,27 +135,8 @@ function fillWheel(formAnswers){
         .classed(questionClass, true);
     }
 	});
-  createPDF();
-}
-
-function showWheel(){
-  wholeForm.addClass("hidden");
-  $("#new-form").removeClass("hidden");
-  $('#pdf').removeClass("hidden");
-}
-
-function createPDF(callback) {
-  var wheel = '<head><link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css"></head><body><header style="background-color: #E5007D; width: 100%; height: 4em;"><a href="http://inclusiveclassrooms.co.uk"><img class="home-link" src="../assets/inclusive-classrooms-300x126.png" alt="inclusive classrooms" height="100%"/></a></header>' +  $('#wheel-container').html() + '</body>';
-  // var request = $.ajax({
-  //   url: "https://inclusive-classrooms.herokuapp.com/pdf",
-  //   type: "post",
-  //   data: wheel
-  // });
-  // request.done(function(response){
-  //   $('#pdf').removeClass("inactive");
-  // });
-  showWheel();
-  highlightWheel();
+  highlightWheel()
+  // createPDF();
 }
 
 function highlightWheel(){
@@ -186,3 +149,16 @@ function highlightWheel(){
     $("."+ value).removeClass("highlight");
   });
 }
+
+// function createPDF(callback) {
+//   var wheel = '<head><link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css"></head><body><header style="background-color: #E5007D; width: 100%; height: 4em;"><a href="http://inclusiveclassrooms.co.uk"><img class="home-link" src="../assets/inclusive-classrooms-300x126.png" alt="inclusive classrooms" height="100%"/></a></header>' +  $('#wheel-container').html() + '</body>';
+//   var request = $.ajax({
+//     url: "https://inclusive-classrooms.herokuapp.com/pdf",
+//     type: "post",
+//     data: wheel
+//   });
+//   request.done(function(response){
+//     $('#pdf').removeClass("inactive");
+//   });
+//   highlightWheel();
+// }
