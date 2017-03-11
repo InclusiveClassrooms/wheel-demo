@@ -18,14 +18,20 @@ Typical use:
 
 `'#wheel-container'`, `'.wheel1'`, etc
 
-#### Arg #3: Object representing the dimentions of the wheel.
+#### Arg #3: File path of the faces svgs. E.g. `'assets'` or `'../assets'`
 
-The object should have keys of `centre`, `height` and `width`
+#### Arg #4: Object representing the configuration of the wheel
 
-#### Arg #4: file path of the faces svgs. E.g. `'assets'` or `'../assets'`
+The object should have the following keys:
+* `centre` # where the centre of the wheel is
+* `height` # the height & width of the box the wheel is in
+* `ratio` # the size of the wheel as a ratio
+* `unique_string`: # a unique string to differentiate each wheel, ensure this string is different for each wheel you are rendering on the same page
+
+#### A
 
 #### Example use:
 
 ```js
-drawWheel(arr, '#wheel-container', {centre: 250, height: 500, width: 500}, '')
+drawWheel(arr, '#wheel-container', '', {centre: 250, height: 500}, 1, 'first')
 ```

@@ -77,8 +77,28 @@
       {question:"apologise_appropriately",answer:"1"}
     ]
 
-    drawWheel(arr1, '.one', {centre: 250, height: 500, width: 500}, '', 1, 'first')
-    drawWheel(arr2, '.two', {centre: 250, height: 500, width: 500}, '', 0.8, 'second')
+    drawWheel(
+      arr1,
+      '.one',
+      '',
+      {
+        centre: 250,
+        height: 500,
+        ratio: 1,
+        unique_string: 'first'
+      }
+    );
+    drawWheel(
+      arr2,
+      '.two',
+      '',
+      {
+        centre: 250,
+        height: 500,
+        ratio: 0.8,
+        unique_string: 'second'
+      }
+    )
 
   </script>
 </html>
