@@ -5,7 +5,7 @@ Check it out at: https://inclusiveclassrooms.github.io/wheel-demo/
 The function to generate the wheel can be downloaded to a `wheel.js` file with:
 
 ```bash
-curl https://cdn.rawgit.com/InclusiveClassrooms/wheel-demo/7dba2c68/wheel.js > wheel.js
+curl https://cdn.rawgit.com/InclusiveClassrooms/wheel-demo/39ebf028/wheel.js > wheel.js
 ```
 
 The function will generate a "skills wheel" inside of an element you specify at a position you specify:
