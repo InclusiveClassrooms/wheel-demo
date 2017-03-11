@@ -24,7 +24,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_
 
     vis.attr("width", width).attr("height", height)
       .append("path")
-      .attr("id", outerTextArray[m])
+      .attr("id", outerTextArray[m] + unique_string)
       .attr("d", textArc)
       .attr("fill", "none")
       .style("stroke", "none")
@@ -37,7 +37,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_
       .style("font-family", "Varela Round")
       .attr("fill", "#6D6D6B")
       .attr("startOffset", "25%")
-      .attr("xlink:href", "#" + outerTextArray[m]) //place the ID of the path here
+      .attr("xlink:href", "#" + outerTextArray[m] + unique_string) //place the ID of the path here
       .text(outerTextArray[m]);
   }
 
@@ -46,7 +46,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_
     for (var i = 0; i < 31; i++) {
 
       if (i === 0) {
-        segmentClass = "face"//  + unique_string;
+        segmentClass = "face";
 
         arc = d3.svg.arc()
           .innerRadius(ratio * (40 + j * 30))
@@ -55,9 +55,9 @@ function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_
           .endAngle(oneSliceWidth); // radians
 
       } else {
-        segmentClass = "segment"//  + unique_string;
-        textPathID = "textpath-" + i + "-" + j;
-        segmentID = "segment-" + i + "-" + j;
+        segmentClass = "segment" + unique_string;
+        textPathID = "textpath" + unique_string + "-" + i + "-" + j;
+        segmentID = "segment" + unique_string + "-" + i + "-" + j;
 
         arc = d3.svg.arc()
           .innerRadius(ratio * (40 + j * 30))
@@ -86,7 +86,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_
             .style("font-family", "Varela Round")
             .attr("fill", "#EA5C37")
             .attr("startOffset", "8%")
-            .attr("xlink:href", "#textpath-" + i + "-" + j) //place the ID of the path here
+            .attr("xlink:href", "#textpath" + unique_string + "-" + i + "-" + j) //place the ID of the path here
             .text(((i - 1) % 5) + 1 + ".");
         }
       }
@@ -126,11 +126,11 @@ function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_
 function fillWheel(formAnswers, unique_string){
   var colours = ["fabb4d","e5007d","672a99", "75bb49", "50b9a7", "009ee3"];
 	formAnswers.forEach(function(elem, index){
-    var questionClass = "segment-" + index;
+    var questionClass = "segment" + unique_string + "-" + index;
     var colour = colours[Math.floor(index/5)];
     for (var i = 0; i<=elem.answer; i++){
       var target = (index + 1) + "-" + i;
-      d3.select("#segment-"+target)
+      d3.select("#segment" + unique_string + "-" + target)
         .attr("fill", "#" + colour)
         .classed(questionClass, true);
     }
@@ -140,11 +140,11 @@ function fillWheel(formAnswers, unique_string){
 }
 
 function highlightWheel(unique_string){
-  $("." + "segment").on("mouseover", function(){
+  $("." + "segment" + unique_string).on("mouseover", function(){
     var value = this.className.baseVal.split(" ")[1];
     $("."+ value).addClass("highlight");
   });
-  $("." + "segment").on("mouseout", function(){
+  $("." + "segment" + unique_string).on("mouseout", function(){
     var value = this.className.baseVal.split(" ")[1];
     $("."+ value).removeClass("highlight");
   });
