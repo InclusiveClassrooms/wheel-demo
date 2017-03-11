@@ -1,4 +1,4 @@
-function drawWheel(formAnswers, element, dimentions, assets_path) {
+function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_string) {
   var vis = d3.select(element).append("svg").attr("id", "wheel-svg");
   var segmentClass;
   var textPathID;
@@ -14,11 +14,11 @@ function drawWheel(formAnswers, element, dimentions, assets_path) {
 
   var childDetails = ['Teaching Assistant',  'Student', 'School', 'School Year', 'Group', 'Date'];
 
-  // Draw the outer text in a circle
+  // draw outer text
   for (var m = 0; m < 6; m++) {
     var textArc = d3.svg.arc()
-      .innerRadius(200)
-      .outerRadius(200)
+      .innerRadius(200 * ratio)
+      .outerRadius(200 * ratio)
       .startAngle(((m * 5) + 1) * oneSliceWidth) // radians
       .endAngle(((m * 5) + 6) * oneSliceWidth); // radians
 
@@ -32,7 +32,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path) {
 
     vis.append("text")
       .append("textPath") //append a textPath to the text element
-      .style("font-size", "8px")
+      .style("font-size", (8 * ratio) + "px")
       .style("text-anchor", "middle") //place the text halfway on the arc
       .style("font-family", "Varela Round")
       .attr("fill", "#6D6D6B")
@@ -41,7 +41,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path) {
       .text(outerTextArray[m]);
   }
 
-  // Generate the outline of the chart
+  // generate chart outline
   for (var j = 0; j < 5; j++) {
     for (var i = 0; i < 31; i++) {
 
@@ -49,26 +49,26 @@ function drawWheel(formAnswers, element, dimentions, assets_path) {
         segmentClass = "face";
 
         arc = d3.svg.arc()
-          .innerRadius(40 + j * 30)
-          .outerRadius(70 + j * 30)
+          .innerRadius(ratio * (40 + j * 30))
+          .outerRadius(ratio * (70 + j * 30))
           .startAngle(0 - oneSliceWidth) // radians
           .endAngle(oneSliceWidth); // radians
 
       } else {
         segmentClass = "segment";
         textPathID = "textpath-" + i + "-" + j;
-				segmentID = "segment-" + i + "-" + j;
+        segmentID = "segment-" + i + "-" + j;
 
         arc = d3.svg.arc()
-          .innerRadius(40 + j * 30)
-          .outerRadius(70 + j * 30)
+          .innerRadius(ratio * (40 + j * 30))
+          .outerRadius(ratio * (70 + j * 30))
           .startAngle(i * oneSliceWidth) // radians
           .endAngle((i + 1) * oneSliceWidth); // radians
 
         if (j === 3) {
           var numArc = d3.svg.arc()
-            .innerRadius(41 + j * 32)
-            .outerRadius(71 + j * 32)
+            .innerRadius(ratio * (41 + j * 32))
+            .outerRadius(ratio * (71 + j * 32))
             .startAngle(i * oneSliceWidth) // radians
             .endAngle((i + 1) * oneSliceWidth); // radians
 
@@ -82,7 +82,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path) {
 
           vis.append("text")
             .append("textPath") //append a textPath to the text element to follow
-            .style("font-size", "18px")
+            .style("font-size", (18 * ratio) + "px")
             .style("font-family", "Varela Round")
             .attr("fill", "#EA5C37")
             .attr("startOffset", "8%")
@@ -95,7 +95,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path) {
         .append("path")
         .attr("d", arc)
         .classed(segmentClass, true)
-				.attr("id", segmentID)
+        .attr("id", segmentID)
         .attr("fill", "transparent")
         .style("stroke", "#6D6D6B")
         .attr("transform", "translate(" + centre + "," + centre + ")");
@@ -103,10 +103,10 @@ function drawWheel(formAnswers, element, dimentions, assets_path) {
       if (i === 0 && j < 4) {
         vis.append("svg:image")
           .attr("xlink:href", assets_path + faceImages[j])
-          .attr("width", 40)
-          .attr("height", 40)
-          .attr("x", centre - 20)
-          .attr("y", (centre - 75) - (j * 30));
+          .attr("width", 40 * ratio)
+          .attr("height", 40 * ratio)
+          .attr("x", centre - 20 * ratio)
+          .attr("y", (centre - ratio * 75 - (ratio * j * 30)));
       }
     }
   }
@@ -114,16 +114,16 @@ function drawWheel(formAnswers, element, dimentions, assets_path) {
   // Draw the orange line seperators on the chart
   for (var k = -7; k < 24; k += 5) {
     vis.append("line")
-      .attr("x2", centre + (190 * Math.cos(k * oneSliceWidth)))
-      .attr("y2", centre + (190 * Math.sin(k * oneSliceWidth)))
-      .attr("x1", centre + (40 * Math.cos(k * oneSliceWidth)))
-      .attr("y1", centre + (40 * Math.sin(k * oneSliceWidth)))
+      .attr("x2", centre + ratio * (190 * Math.cos(k * oneSliceWidth)))
+      .attr("y2", centre + ratio * (190 * Math.sin(k * oneSliceWidth)))
+      .attr("x1", centre + ratio * (40 * Math.cos(k * oneSliceWidth)))
+      .attr("y1", centre + ratio * (40 * Math.sin(k * oneSliceWidth)))
       .attr("stroke", "#EA5C37");
   }
-  fillWheel(formAnswers);
+  fillWheel(formAnswers, unique_string);
 }
 
-function fillWheel(formAnswers){
+function fillWheel(formAnswers, unique_string){
   var colours = ["fabb4d","e5007d","672a99", "75bb49", "50b9a7", "009ee3"];
 	formAnswers.forEach(function(elem, index){
     var questionClass = "segment-" + (index-6);
@@ -135,16 +135,16 @@ function fillWheel(formAnswers){
         .classed(questionClass, true);
     }
 	});
-  highlightWheel()
+  highlightWheel(unique_string)
   // createPDF();
 }
 
-function highlightWheel(){
-  $(".segment").on("mouseover", function(){
+function highlightWheel(unique_string){
+  $("." + "segment").on("mouseover", function(){
     var value = this.className.baseVal.split(" ")[1];
     $("."+ value).addClass("highlight");
   });
-  $(".segment").on("mouseout", function(){
+  $("." + "segment").on("mouseout", function(){
     var value = this.className.baseVal.split(" ")[1];
     $("."+ value).removeClass("highlight");
   });
