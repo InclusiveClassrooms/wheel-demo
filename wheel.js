@@ -46,7 +46,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_
     for (var i = 0; i < 31; i++) {
 
       if (i === 0) {
-        segmentClass = "face";
+        segmentClass = "face"//  + unique_string;
 
         arc = d3.svg.arc()
           .innerRadius(ratio * (40 + j * 30))
@@ -55,7 +55,7 @@ function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_
           .endAngle(oneSliceWidth); // radians
 
       } else {
-        segmentClass = "segment";
+        segmentClass = "segment"//  + unique_string;
         textPathID = "textpath-" + i + "-" + j;
         segmentID = "segment-" + i + "-" + j;
 
@@ -126,10 +126,10 @@ function drawWheel(formAnswers, element, dimentions, assets_path, ratio, unique_
 function fillWheel(formAnswers, unique_string){
   var colours = ["fabb4d","e5007d","672a99", "75bb49", "50b9a7", "009ee3"];
 	formAnswers.forEach(function(elem, index){
-    var questionClass = "segment-" + (index-6);
-    var colour = colours[Math.floor((index-6)/5)];
+    var questionClass = "segment-" + index;
+    var colour = colours[Math.floor(index/5)];
     for (var i = 0; i<=elem.answer; i++){
-      var target = (index - 5) + "-" + (i); // index has to be - 5 to account for the student details at the start of the form
+      var target = (index + 1) + "-" + i;
       d3.select("#segment-"+target)
         .attr("fill", "#" + colour)
         .classed(questionClass, true);
